@@ -1,0 +1,59 @@
+
+¿Que pasa si sólo tenemos datos en formato grib y queremos trabajarlo como dataframe en Python?
+
+1. Convert to nc file
+###################
+GRIB > NC
+
+-Merge (grb)
+cat *.grb todo.grb
+
+-Extract 1 var data (eg: tmp2m grb)
+cdo select,name=var128 todo.grb tmp2m.grb
+
+-Convert grb to nc
+cdo -f nc copy tmp2m.grb tmp2m.nc
+###################
+
+
+2. Extract data as a txt file
+###################
+TIME SERIE Specific location (txt file)
+
+-Merge (grb)
+cat *.grb todo.grb
+
+-Extract 1 var data (eg: tmp2m grb)
+cdo select,name=var128 todo.grb tmp2m.grb
+cdo select,name=var128,var129,var161 todo.grb vars.grb
+
+-Extract data for a location (lat,lon)
+cdo outputtab,date,time,name,value:2 -remapnn,lon=-75.47_lat=-7.44 vars.grb > salida_1.txt
+cdo outputtab,date,time,name,lev,value:2 -remapnn,lon=-75.47_lat=-7.44 Eta05_C00_TEMP_2023032312.nc > salida_1.txt
+
+-Prepare data
+*delete 1&2 line
+    sed '1,2d' salida_1.txt
+*delete 1era columna vacia
+    cut -d' ' -f2- salida_1.txt
+*delete ultima columna vaci
+    sed 's/ *$//' salida_1.txt
+*replace more than 1 whitespace for 1 whitespace
+    sed 's/[ ][ ]*/ /g' salida_1.txt
+
+or
+
+*txt superficie
+    sed  -e '1 i\ fecha hora var value' -e '1,2d;s/ *$//;s/[ ][ ]*/ /g' salida_1.txt | cut -d' ' -f2- > salida_2.txt
+
+*txt varios niveles isob
+    sed  -e '1 i\ fecha hora var lev value' -e '1,2d;s/ *$//;s/[ ][ ]*/ /g' salida_1.txt | cut -d' ' -f2- > salida_2.txt
+
+###################
+Plot (python)
+
+#
+
+
+
+
