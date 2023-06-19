@@ -1,0 +1,13 @@
+cutting & improving wrf corpac data / gridded problem
+
+cdo select,name=var11 WRF_FINAL_SFC.grb tmp2m.grb
+ncdump -h tmp2m.grb
+
+
+cdo griddes tmp2m.grb > mygrid
+or
+cdo griddes tmp2m.nc > mygrid
+
+sed -i "s/generic/lonlat/g" mygrid
+cdo setgrid,mygrid tmp2m.grb tmp2m_cor.grb
+cdo setgrid,mygrid tmp2m.nc tmp2m_cor.nc
