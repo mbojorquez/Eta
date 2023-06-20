@@ -11,3 +11,11 @@ cdo griddes tmp2m.nc > mygrid
 sed -i "s/generic/lonlat/g" mygrid
 cdo setgrid,mygrid tmp2m.grb tmp2m_cor.grb
 cdo setgrid,mygrid tmp2m.nc tmp2m_cor.nc
+
+cdo doesnt work with mercator projection data
+We need to use eccodes software
+
+grib_dump tmp2m.grb
+grib_ls tmp2m.grb
+grib_get_data -p validityDate,validityTime -F "%.2f" tmp2m.grb > prueba1.txt
+
