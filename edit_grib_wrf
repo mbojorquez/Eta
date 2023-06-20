@@ -21,3 +21,5 @@ grib_get_data -p validityDate,validityTime -F "%.2f" tmp2m.grb > prueba1.txt
 
 remove lines with text
 awk '/[0-9]/' prueba1.txt > prueba2.txt
+cut -d' ' -f2- prueba2.txt > prueba3.txt
+awk  '{printf "%s %s %s %i %04i\n", $1 , $2 , $3 , $4 , $5 }' prueba3.txt > prueba4.txt
