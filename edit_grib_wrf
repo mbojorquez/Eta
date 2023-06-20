@@ -19,3 +19,5 @@ grib_dump tmp2m.grb
 grib_ls tmp2m.grb
 grib_get_data -p validityDate,validityTime -F "%.2f" tmp2m.grb > prueba1.txt
 
+remove lines with text
+awk '/[0-9]/' prueba1.txt > prueba2.txt
