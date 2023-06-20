@@ -1,4 +1,4 @@
-cutting & improving wrf corpac data / gridded problem
+4.cutting & improving wrf corpac data / gridded problem
 
 cdo select,name=var11 WRF_FINAL_SFC.grb tmp2m.grb
 ncdump -h tmp2m.grb
@@ -23,4 +23,4 @@ remove lines with text
 awk '/[0-9]/' prueba1.txt > prueba2.txt
 cut -d' ' -f2- prueba2.txt > prueba3.txt
 awk  '{printf "%s %s %s %i %04i\n", $1 , $2 , $3 , $4 , $5 }' prueba3.txt > prueba4.txt
-sed  -i '1 i\ fecha hora var value'
+sed  -i '1 i\fecha hora var value' prueba4.txt
