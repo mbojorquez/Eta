@@ -30,7 +30,7 @@ SO, we need to use ECCODES software
 grib_dump tmp2m.grb #Ni-Nj, gridType, grib edition
 grib_ls tmp2m.grb #gridType, shortname, level
 
-#Getting txt data of temp based on lat, lon, temp value, fecha & hora)
+#Getting txt data of temp based on the complete registry (lat, lon, temp value, fecha & hora)
 grib_get_data -p validityDate,validityTime -F "%.2f" tmp2m.grb > prueba1.txt
 
 awk '/[0-9]/' prueba1.txt > prueba2.txt #remove lines with text
