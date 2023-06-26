@@ -1,9 +1,18 @@
-4.cutting & improving wrf corpac data / gridded problem
+#DATOS WRF-CORPAC GRIB EN PROYECCION DE GRILLA "MERCATOR"
+
+1.Extracción de variables en SMET120 (DPT2M RH2M SPFH2M TMP2M UGRD10M VGRD10M) - FALTA QNH
+-wgrib
+Bash file using a loop to extract variables
+Bash content:
+...
+
+2.Extracting temperature time serie of WRF-Corpac data / gridded problem
 
 cdo select,name=var11 WRF_FINAL_SFC.grb tmp2m.grb
-ncdump -h tmp2m.grb
+ncdump -h tmp2m.grb #mercator pojection
 
-
+######################################
+... trying to convert to regular grid
 #cdo griddes tmp2m.grb > mygrid
 #or
 #cdo griddes tmp2m.nc > mygrid
@@ -11,17 +20,22 @@ ncdump -h tmp2m.grb
 #sed -i "s/generic/lonlat/g" mygrid
 #cdo setgrid,mygrid tmp2m.grb tmp2m_cor.grb
 #cdo setgrid,mygrid tmp2m.nc tmp2m_cor.nc
+... cdo doesnt recognize mercator
+#######################################
 
-cdo doesnt work with mercator projection data
-We need to use eccodes software
+3.CDO doesnt work with mercator projection data
+SO, we need to use ECCODES software
 
+#Checking grib info
 grib_dump tmp2m.grb #Ni-Nj, gridType, grib edition
 grib_ls tmp2m.grb #gridType, shortname, level
 
+#Getting txt data of temp based on lat, lon, temp value, fecha & hora)
 grib_get_data -p validityDate,validityTime -F "%.2f" tmp2m.grb > prueba1.txt
 
-remove lines with text
-awk '/[0-9]/' prueba1.txt > prueba2.txt
-cut -d' ' -f2- prueba2.txt > prueba3.txt
-awk  '{printf "%s %s %s %i %04i\n", $1 , $2 , $3 , $4 , $5 }' prueba3.txt > prueba4.txt
-sed  -i '1 i\fecha hora var value' prueba4.txt
+awk '/[0-9]/' prueba1.txt > prueba2.txt #remove lines with text
+cut -d' ' -f2- prueba2.txt > prueba3.txt #remove first empty column
+awk  '{printf "%s %s %s %i %04i\n", $1 , $2 , $3 , $4 , $5 }' prueba3.txt > prueba4.txt #fill with zeros the last column of 4 digit (length)
+sed  -i '1 i\lat lon value fecha hora' prueba4.txt #add the first row with headers lat, lon, value, fecha y hora.
+
+4. working in google collab ... check file 
