@@ -10,6 +10,7 @@ GRIB > NC
 cat *.grb todo.grb
 
 -Extract 1 var data (eg: tmp2m grb)
+#compare ctl & cdo sinfo todo.grb to choose the variable (in this case var128 > temp2m)
 cdo select,name=var128 todo.grb tmp2m.grb
 
 -Convert grb to nc
