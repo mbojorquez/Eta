@@ -38,4 +38,6 @@ cut -d' ' -f2- prueba2.txt > prueba3.txt #remove first empty column
 awk  '{printf "%s %s %s %i %04i\n", $1 , $2 , $3 , $4 , $5 }' prueba3.txt > prueba4.txt #fill with zeros the last column of 4 digit (length)
 sed  -i '1 i\lat lon value fecha hora' prueba4.txt #add the first row with headers lat, lon, value, fecha y hora.
 
+FInally, we have csv data with values for each gridded point and all times, this can viewed as a df in python.
+
 4. working in google collab ... check file 
