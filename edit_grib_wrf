@@ -4,19 +4,20 @@ cdo select,name=var11 WRF_FINAL_SFC.grb tmp2m.grb
 ncdump -h tmp2m.grb
 
 
-cdo griddes tmp2m.grb > mygrid
-or
-cdo griddes tmp2m.nc > mygrid
+#cdo griddes tmp2m.grb > mygrid
+#or
+#cdo griddes tmp2m.nc > mygrid
 
-sed -i "s/generic/lonlat/g" mygrid
-cdo setgrid,mygrid tmp2m.grb tmp2m_cor.grb
-cdo setgrid,mygrid tmp2m.nc tmp2m_cor.nc
+#sed -i "s/generic/lonlat/g" mygrid
+#cdo setgrid,mygrid tmp2m.grb tmp2m_cor.grb
+#cdo setgrid,mygrid tmp2m.nc tmp2m_cor.nc
 
 cdo doesnt work with mercator projection data
 We need to use eccodes software
 
-grib_dump tmp2m.grb
-grib_ls tmp2m.grb
+grib_dump tmp2m.grb #Ni-Nj, gridType, grib edition
+grib_ls tmp2m.grb #gridType, shortname, level
+
 grib_get_data -p validityDate,validityTime -F "%.2f" tmp2m.grb > prueba1.txt
 
 remove lines with text
