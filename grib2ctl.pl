@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-#   makes a GrADS control file for grib files
+##   makes a GrADS control file for grib files
 #
 #   requires wgrib and Perl5
 #
