@@ -4,7 +4,7 @@
 -wgrib
 Bash file using a loop to extract variables
 Bash content:
-...
+Check file "wp_extract.sh"
 
 2.Extracting temperature time serie of WRF-Corpac data / gridded problem
 
