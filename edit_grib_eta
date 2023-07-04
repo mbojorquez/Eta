@@ -30,8 +30,12 @@ cdo select,name=var128 todo.grb tmp2m.grb
 cdo select,name=var128,var129,var161 todo.grb vars.grb
 
 -Extract data for a location (lat,lon)
-cdo outputtab,date,time,name,value:2 -remapnn,lon=-75.47_lat=-7.44 vars.grb > salida_1.txt
-cdo outputtab,date,time,name,lev,value:2 -remapnn,lon=-75.47_lat=-7.44 Eta05_C00_TEMP_2023032312.nc > salida_1.txt
+Ruta: "/media/mb/HDD_PC/ETA/Eta_HDD_PC/Versoes/Eta_exp/tempo/out/Selva_Caso2_2312Z/grbctl/2023032312/C00/2D" -> datos 3D (x,y,t) - sfc
+cdo outputtab,date,time,name,value:2 -remapnn,lon=-75.47_lat=-7.44 tmp2m.grb > salida_tmp_sfc_1.txt (1 variable de superf)
+cdo outputtab,date,time,name,value:2 -remapnn,lon=-75.47_lat=-7.44 vars.grb > salida_tmp_sfc_1.txt (>1 variable de superf)
+
+Ruta: "/media/mb/HDD_PC/ETA/Eta_HDD_PC/Versoes/Eta_exp/tempo/out/Selva_Caso2_2312Z/netcdf/2023032312/C00" -> datos 4D (x,y,z,t) - isob levels
+cdo outputtab,date,time,name,lev,value:2 -remapnn,lon=-75.47_lat=-7.44 Eta05_C00_TEMP_2023032312.nc > salida_1.txt (>1 variable en niveles isob from nc file)
 
 -Prepare data
 *delete 1&2 line
