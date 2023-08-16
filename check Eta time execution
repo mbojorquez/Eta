@@ -1,0 +1,3 @@
+checking execution end time
+find /home/mb/Versoes/Eta_exp -name 'tee' | xargs cat
+Find /home/labmet/Versoes/ -name 'EtaFcst.out' | xargs cat
