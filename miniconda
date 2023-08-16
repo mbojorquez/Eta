@@ -1,0 +1,14 @@
+
+download https://docs.conda.io/en/latest/miniconda.html#linux-installers
+
+#Install miniconda, create env and install cdo
+sh Miniconda3-py38_23.5.2-0-Linux-x86_64.sh
+conda create --name meteoro python=3.8
+conda activate meteoro
+conda install -c conda-forge cdo
+
+#Verify:
+cdo -V
+cdo
+find /home/mb -name cdo
+/home/mb/miniconda3/envs/meteoro/bin/cdo
