@@ -1,0 +1,46 @@
+#Windows subsystem Linux (WSL)
+
+-Microsoft Store
+Instalar Windows Terminal from Microsoft Store
+
+-Panel de Control
+Habilitar opción:
+Panel de control > programas y caracteristicas
+> Activar o desactivar las caracteristicas de Windows
+> Subsistema Windows para Linux
+Reiniciar PC
+
+-Microsoft Store
+Instalar Ubuntu 20.04.6 LTS (500 MB)
+Definir usuario y contraseña
+
+-Terminal Ubuntu vs Terminal Windows
+
+####
+La instalación de librerias del modelo eta + conda tomó cerca de 2GB.
+Los consume del disco C
+No incluye software gedit (500MB).
+####
+
+¿Físicamente donde esta el /home/user/?
+C:\Users\pronostico\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu20.04LTS_79rhkp1fndgsc\LocalState\rootfs\home\mb
+
+¿Cómo acceder al disco C/D?
+/mnt/c
+/mnt/d
+
+4. 
+PC CON 16 CPUS
+wget -c ...eta_VII-WorkEta.tgz  =   2MB
+sh wget_Eta_support_data.sh     =   1GB
+
+./Install_wgrib2_wgrib_nvidia.sh 
+6:10-6:25 hasta single system install - 15 min
+6:25-6:30 desde el single system install
+nvidia+wgrib2+wgrib             =   4.7GB  - Instaló aprox 24 GB
+
+compile+configure.sh 0 GB
+
+.bashrc
+
+export DISPLAY=:0.0
