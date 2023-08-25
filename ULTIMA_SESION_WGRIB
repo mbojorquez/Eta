@@ -1,0 +1,3 @@
+PASOS PARA USAR WGRIB
+
+Descargue wgrib y grib2ctl.pl, colóquelo en /usr/local/bin
