@@ -1,3 +1,25 @@
 PASOS PARA USAR WGRIB
 
-Descargue wgrib y grib2ctl.pl, colóquelo en /usr/local/bin
+Descargue wgrib y grib2ctl.pl
+
+Ingresar aL siguiente enlace y descargar
+https://drive.google.com/drive/folders/1hEe2XisV9TN_OrA3dO2KffDQZneCytvO?usp=sharing
+
+Dar permisos a los archivos y copiar al directorio /usr/local/bin
+
+> chmod 755 wgrib
+> chmod 755 grib2ctl.pl
+> sudo cp wgrib /usr/local/bin
+> sudo cp grib2ctl.pl /usr/local/bin
+
+> cd "DIRECTORIO DE SUS SALIDAS DE SIMULACION 3D"
+> cat *grb > todo.grb
+> wgrib -v todo.grb
+> wgrib -s todo.grb | grep ":RH:500 mb:" | wgrib -i -grib todo.grb -o rh_500mb
+> grib2ctl.pl -verf rh500mb > rh500mb.ctl
+> gribmap -i rh500mb.ctl
+
+
+--------------------
+
+> cdo -f nc import_binary infile.ctl outfile.nc
