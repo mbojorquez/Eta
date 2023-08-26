@@ -1,0 +1,51 @@
+#DATOS ETA GRIB EN PROYECCION DE GRILLA REGULAR
+
+¿Que pasa si sólo tenemos datos en formato grib y queremos trabajarlo como dataframe en Python?
+
+1. Convert to nc file
+###################
+GRIB > NC
+
+-Merge (grb)
+cat *.grb > todo.grb
+
+-Extract 1 var data (eg: tmp2m grb)
+#compare ctl & cdo sinfo todo.grb to choose the variable (in this case var128 > temp2m)
+cdo select,name=var128 todo.grb tmp2m.grb
+
+-Convert grb to nc
+cdo -f nc copy tmp2m.grb tmp2m.nc
+###################
+
+
+2. Extract data as a txt file
+Ruta: "/media/mb/HDD_PC/ETA/Eta_HDD_PC/Versoes/Eta_exp/tempo/out/Selva_Caso2_2312Z/netcdf/2023032312/C00" -> datos 4D (x,y,z,t) - isob levels
+
+cdo outputtab,date,time,name,lev,value:2 -remapnn,lon=-77.112_lat=-12.025 Eta05_C00_TEMP_2023032312.nc > salida_1.txt (>1 variable en niveles isob from nc file)
+
+-Prepare data
+*delete 1&2 line
+    sed '1,2d' salida_1.txt
+*delete 1era columna vacia
+    cut -d' ' -f2- salida_1.txt
+*delete ultima columna vaci
+    sed 's/ *$//' salida_1.txt
+*replace more than 1 whitespace for 1 whitespace
+    sed 's/[ ][ ]*/ /g' salida_1.txt
+
+or
+
+*txt superficie
+    sed  -e '1 i\ fecha hora var value' -e '1,2d;s/ *$//;s/[ ][ ]*/ /g' salida_1.txt | cut -d' ' -f2- > salida_2.txt
+
+*txt varios niveles isob
+    sed  -e '1 i\ fecha hora var lev value' -e '1,2d;s/ *$//;s/[ ][ ]*/ /g' salida_1.txt | cut -d' ' -f2- > salida_2.txt
+
+###################
+Plot (python)
+
+#
+
+
+
+
