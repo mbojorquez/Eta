@@ -50,10 +50,12 @@ cdo outputtab,date,time,name,lev,value:2 -remapnn,lon=-75.47_lat=-7.44 Eta05_C00
 or
 
 *txt superficie
-    sed  -e '1 i\ fecha hora var value' -e '1,2d;s/ *$//;s/[ ][ ]*/ /g' salida_1.txt | cut -d' ' -f2- > salida_2.txt
+    #sed  -e '1 i\ fecha hora var value' -e '1,2d;s/ *$//;s/[ ][ ]*/ /g' salida_1.txt | cut -d' ' -f2- > salida_2.txt
+    sed  -e '1 i\ fecha hora var value' -e '1,3d;s/ *$//;s/[ ][ ]*/ /g' salida_tmp_sfc_1.txt | head -n -2 | cut -d' ' -f2- > salida_2.txt
 
 *txt varios niveles isob
     sed  -e '1 i\ fecha hora var lev value' -e '1,2d;s/ *$//;s/[ ][ ]*/ /g' salida_1.txt | cut -d' ' -f2- > salida_2.txt
+    sed  -e '1 i\ fecha hora var lev value' -e '1,3d;s/ *$//;s/[ ][ ]*/ /g' salida_tmp_sfc_1.txt | head -n -2 | cut -d' ' -f2- > salida_2.txt
 
 ###################
 Plot (python)
